@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
         signature: ['var(--font-signature)'],
         noto: ['var(--font-noto)'],
       },
@@ -67,19 +68,23 @@ module.exports = {
           DEFAULT: 'hsl(var(--widget))',
           foreground: 'hsl(var(--widget-foreground))',
         },
+        // The upstream brand scale, remapped to the design-system accent
+        // (indigo). Kept under the same name so every existing
+        // `bg-documenso` / `text-documenso-700` call site inherits the rebrand
+        // instead of silently dropping to an uncoloured class.
         documenso: {
-          DEFAULT: '#A2E771',
-          50: '#FFFFFF',
-          100: '#FDFFFD',
-          200: '#E7F9DA',
-          300: '#D0F3B7',
-          400: '#B9ED94',
-          500: '#A2E771',
-          600: '#83DF41',
-          700: '#66C622',
-          800: '#4D9619',
-          900: '#356611',
-          950: '#284E0D',
+          DEFAULT: '#6366f1',
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          200: '#c7d2fe',
+          300: '#a5b4fc',
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
+          950: '#1e1b4b',
         },
         dawn: {
           DEFAULT: '#aaa89f',
@@ -122,13 +127,18 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      // Brutalist: sharp corners everywhere. `--radius` is 0 in the theme, and
+      // the scale is pinned to 0 rather than derived from it because
+      // `calc(var(--radius) - 4px)` evaluates to a negative length, which CSS
+      // discards — leaving the element on the browser default instead of a
+      // deliberate 0. `rounded-full` is untouched (avatars, status dots).
       borderRadius: {
-        DEFAULT: 'calc(var(--radius) - 3px)',
-        '2xl': 'calc(var(--radius) + 4px)',
-        xl: 'calc(var(--radius) + 2px)',
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        DEFAULT: '0',
+        '2xl': '0',
+        xl: '0',
+        lg: '0',
+        md: '0',
+        sm: '0',
       },
       keyframes: {
         'accordion-down': {

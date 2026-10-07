@@ -2,52 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * DHDTech.io brutalism palette.
+ *
+ * The values below are the design-system tokens expressed as HSL channel
+ * triplets, because every Tailwind colour in `@documenso/tailwind-config` is
+ * mapped as `hsl(var(--token))`. The mapping is deliberately unchanged — only
+ * the values move — so every existing `/opacity` modifier
+ * (`text-muted-foreground/60`, `bg-background/80`, …) keeps behaving exactly
+ * as it did before.
+ *
+ * Translucent design-system tokens (panel, line, rule) are stored composited
+ * over the surface they sit on — the surfaces are flat and known
+ * (#0a0a0a void, #101010 surface), so the composite is exact.
+ *
+ * Keep in sync with `packages/lib/constants/theme.ts` (DEFAULT_BRAND_COLORS),
+ * which carries the same colours as hex for the email renderer and the
+ * branding colour picker.
+ */
 @layer base {
   :root,
   .dark-mode-disabled {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    /* void #0a0a0a · ink #e0e0e0 */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 87.8%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* surface-2 #161616 · faint #828a97 */
+    --muted: 0 0% 8.6%;
+    --muted-foreground: 217.1 9.2% 55.1%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 6.3%;
+    --popover-foreground: 0 0% 87.8%;
 
-    --card: 0 0% 100%;
-    --card-border: 214.3 31.8% 91.4%;
-    --card-border-tint: 112 205 159;
-    --card-foreground: 222.2 47.4% 11.2%;
+    /* surface #101010 · line-strong #282828 */
+    --card: 0 0% 6.3%;
+    --card-border: 0 0% 15.7%;
+    --card-border-tint: 99 102 241;
+    --card-foreground: 0 0% 87.8%;
 
-    --field-card: 95 74% 90%;
-    --field-card-border: 95.08 71.08% 67.45%;
-    --field-card-foreground: 222.2 47.4% 11.2%;
+    --field-card: 0 0% 8.6%;
+    --field-card-border: 0 0% 15.7%;
+    --field-card-foreground: 0 0% 87.8%;
 
-    --widget: 0 0% 97%;
-    --widget-foreground: 0 0% 95%;
+    --widget: 0 0% 6.3%;
+    --widget-foreground: 0 0% 8.6%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    /* line #191919 · line-strong #282828 */
+    --border: 0 0% 9.8%;
+    --input: 0 0% 15.7%;
 
-    --primary: 95.08 71.08% 67.45%;
-    --primary-foreground: 95.08 71.08% 10%;
+    /* accent-light #818cf8 · void #0a0a0a
+       `--primary` is dual-purpose in Documenso: it fills primary buttons AND
+       colours inline links (`text-primary`). accent-light is the only
+       design-system accent shade that clears WCAG AA in both roles — 6.6:1 as
+       text on the void, 5.4:1 for void text on it as a fill. The design
+       system's darker filled button (accent-dark + white) is kept on the
+       destructive/`--accent`-adjacent surfaces where a solid block is wanted. */
+    --primary: 234.5 89.5% 73.9%;
+    --primary-foreground: 0 0% 3.9%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 8.6%;
+    --secondary-foreground: 0 0% 87.8%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 8.6%;
+    --accent-foreground: 0 0% 87.8%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 40% 98%;
+    /* danger #ef4444 · void #0a0a0a — mirrors the design system's `danger`
+       button (red fill, dark text, 5.3:1). */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 3.9%;
 
-    --ring: 95.08 71.08% 67.45%;
+    /* accent #6366f1 */
+    --ring: 238.7 83.5% 66.7%;
 
-    --radius: 0.5rem;
+    /* Radius 0 everywhere — sharp corners, visible borders. */
+    --radius: 0rem;
 
-    --warning: 54 96% 45%;
+    /* warning #f59e0b */
+    --warning: 37.7 92.1% 50.2%;
 
-    --gold: 47.9 95.8% 53.1%;
+    --gold: 37.7 92.1% 50.2%;
 
     --recipient-green: 100 48% 55%;
     --recipient-blue: 212 56% 50%;
@@ -82,18 +116,18 @@
     --new-white-800: 0, 0%, 90%;
     --new-white-900: 0, 0%, 100%;
 
-    /* Primary - Green */
-    --new-primary-50: 98, 73%, 97%;
-    --new-primary-100: 95, 73%, 94%;
-    --new-primary-200: 94, 70%, 87%;
-    --new-primary-300: 95, 71%, 81%;
-    --new-primary-400: 95, 71%, 74%;
-    --new-primary-500: 95, 71%, 67%;
-    --new-primary-600: 95, 71%, 54%;
-    --new-primary-700: 95, 71%, 41%;
-    --new-primary-800: 95, 71%, 27%;
-    --new-primary-900: 95, 72%, 14%;
-    --new-primary-950: 95, 72%, 7%;
+    /* Primary - Accent (indigo) */
+    --new-primary-50: 226, 100%, 97%;
+    --new-primary-100: 228, 94%, 94%;
+    --new-primary-200: 228, 96%, 89%;
+    --new-primary-300: 230, 94%, 82%;
+    --new-primary-400: 234, 89%, 74%;
+    --new-primary-500: 239, 84%, 67%;
+    --new-primary-600: 243, 75%, 59%;
+    --new-primary-700: 245, 58%, 51%;
+    --new-primary-800: 244, 55%, 41%;
+    --new-primary-900: 242, 47%, 34%;
+    --new-primary-950: 244, 47%, 20%;
 
     /* Secondary - Info */
     --new-info-50: 210, 54%, 95%;
@@ -138,53 +172,67 @@
     --new-surface-black: 0, 0%, 0%;
     --new-surface-white: 0, 0%, 91%;
 
-    --envelope-editor-background: 210 40% 98.04%;
+    --envelope-editor-background: 0 0% 6.3%;
   }
 
+  /*
+   * The design system is dark-only, so this block carries the identical values
+   * as `:root` above. A light/dark toggle therefore changes nothing visually —
+   * deliberate, and the reason the app renders the void palette no matter what
+   * theme the session cookie resolves to.
+   */
   .dark:not(.dark-mode-disabled) {
-    --background: 0 0% 14.9%;
-    --foreground: 0 0% 97%;
+    /* void #0a0a0a · ink #e0e0e0 */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 87.8%;
 
-    --muted: 0 0% 23.4%;
-    --muted-foreground: 0 0% 85%;
+    /* surface-2 #161616 · faint #828a97 */
+    --muted: 0 0% 8.6%;
+    --muted-foreground: 217.1 9.2% 55.1%;
 
-    --popover: 0 0% 14.9%;
-    --popover-foreground: 0 0% 90%;
+    --popover: 0 0% 6.3%;
+    --popover-foreground: 0 0% 87.8%;
 
-    --card: 0 0% 14.9%;
-    --card-border: 0 0% 27.9%;
-    --card-border-tint: 112 205 159;
-    --card-foreground: 0 0% 95%;
+    /* surface #101010 · line-strong #282828 */
+    --card: 0 0% 6.3%;
+    --card-border: 0 0% 15.7%;
+    --card-border-tint: 99 102 241;
+    --card-foreground: 0 0% 87.8%;
 
-    --widget: 0 0% 14.9%;
-    --widget-foreground: 0 0% 18%;
+    --widget: 0 0% 6.3%;
+    --widget-foreground: 0 0% 8.6%;
 
-    --border: 0 0% 27.9%;
-    --input: 0 0% 27.9%;
+    /* line #191919 · line-strong #282828 */
+    --border: 0 0% 9.8%;
+    --input: 0 0% 15.7%;
+    --field-border: 0 0% 15.7%;
 
-    --field-border: 214.3 31.8% 91.4%;
+    /* accent-light #818cf8 · void #0a0a0a */
+    --primary: 234.5 89.5% 73.9%;
+    --primary-foreground: 0 0% 3.9%;
 
-    --primary: 95.08 71.08% 67.45%;
-    --primary-foreground: 95.08 71.08% 10%;
+    --secondary: 0 0% 8.6%;
+    --secondary-foreground: 0 0% 87.8%;
 
-    --secondary: 0 0% 23.4%;
-    --secondary-foreground: 95.08 71.08% 67.45%;
+    --accent: 0 0% 8.6%;
+    --accent-foreground: 0 0% 87.8%;
 
-    --accent: 0 0% 27.9%;
-    --accent-foreground: 95.08 71.08% 67.45%;
+    /* danger #ef4444 · void #0a0a0a */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 3.9%;
 
-    --destructive: 0 87% 62%;
-    --destructive-foreground: 0 0% 98%;
+    /* accent #6366f1 */
+    --ring: 238.7 83.5% 66.7%;
 
-    --ring: 95.08 71.08% 67.45%;
+    /* Radius 0 everywhere. */
+    --radius: 0rem;
 
-    --radius: 0.5rem;
+    /* warning #f59e0b */
+    --warning: 37.7 92.1% 50.2%;
 
-    --warning: 54 96% 45%;
+    --gold: 37.7 92.1% 50.2%;
 
-    --gold: 47.9 95.8% 53.1%;
-
-    --envelope-editor-background: 0 0% 14.9%;
+    --envelope-editor-background: 0 0% 6.3%;
   }
 }
 

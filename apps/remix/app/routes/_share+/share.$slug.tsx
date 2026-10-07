@@ -12,15 +12,15 @@ export function meta({ params: { slug } }: Route.MetaArgs) {
   }
 
   return [
-    { title: 'Documenso - Share' },
-    { description: 'I just signed a document in style with Documenso!' },
+    { title: 'DHDTech.io Sign - Share' },
+    { description: 'I just signed a document in style with DHDTech.io Sign!' },
     {
       property: 'og:title',
-      content: 'Documenso - Join the open source signing revolution',
+      content: 'DHDTech.io Sign - Signing, done properly',
     },
     {
       property: 'og:description',
-      content: 'I just signed with Documenso!',
+      content: 'I just signed with DHDTech.io Sign!',
     },
     {
       property: 'og:type',
@@ -44,7 +44,7 @@ export function meta({ params: { slug } }: Route.MetaArgs) {
     },
     {
       name: 'twitter:description',
-      content: 'I just signed with Documenso!',
+      content: 'I just signed with DHDTech.io Sign!',
     },
   ];
 }

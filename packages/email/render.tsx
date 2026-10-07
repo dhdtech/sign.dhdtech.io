@@ -57,6 +57,46 @@ const buildEmailColors = (brandingColors?: EmailBrandingColors): Record<string, 
   };
 };
 
+/**
+ * The Tailwind theme handed to React Email for every render.
+ *
+ * Emails carry no CSS custom properties, so the palette arrives as the concrete
+ * hex values above. The typography and radius below mirror the app's design
+ * tokens (`Space Grotesk` / `Martian Mono`, radius 0), but the webfonts are
+ * named in the stack only — no `@font-face` is injected, because the major
+ * clients strip webfonts and a self-hosted woff2 would never load. Clients that
+ * cannot resolve the named family fall through to the system sans stack.
+ */
+const buildEmailTailwindConfig = (tailwindColors: Record<string, string>) => ({
+  theme: {
+    extend: {
+      colors: tailwindColors,
+      fontFamily: {
+        sans: [
+          'Space Grotesk',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'sans-serif',
+        ],
+        mono: ['Martian Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
+      borderRadius: {
+        DEFAULT: '0',
+        sm: '0',
+        md: '0',
+        lg: '0',
+        xl: '0',
+        '2xl': '0',
+      },
+    },
+  },
+});
+
 export const render = async (element: React.ReactNode, options?: RenderOptions) => {
   const { branding, ...otherOptions } = options ?? {};
 
@@ -64,17 +104,7 @@ export const render = async (element: React.ReactNode, options?: RenderOptions) 
 
   return ReactEmail.render(
     <BrandingProvider branding={branding}>
-      <Tailwind
-        config={{
-          theme: {
-            extend: {
-              colors: tailwindColors,
-            },
-          },
-        }}
-      >
-        {element}
-      </Tailwind>
+      <Tailwind config={buildEmailTailwindConfig(tailwindColors)}>{element}</Tailwind>
     </BrandingProvider>,
     otherOptions,
   );
@@ -92,17 +122,7 @@ export const renderWithI18N = async (element: React.ReactNode, options?: RenderO
   return ReactEmail.render(
     <I18nProvider i18n={i18n}>
       <BrandingProvider branding={branding}>
-        <Tailwind
-          config={{
-            theme: {
-              extend: {
-                colors: tailwindColors,
-              },
-            },
-          }}
-        >
-          {element}
-        </Tailwind>
+        <Tailwind config={buildEmailTailwindConfig(tailwindColors)}>{element}</Tailwind>
       </BrandingProvider>
     </I18nProvider>,
     otherOptions,

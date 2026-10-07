@@ -1,6 +1,6 @@
 {
-  "name": "Documenso",
-  "short_name": "Documenso",
+  "name": "DHDTech.io Sign",
+  "short_name": "Sign",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#A2E771",
-  "background_color": "#FFFFFF",
+  "theme_color": "#6366f1",
+  "background_color": "#0a0a0a",
   "display": "standalone"
 }

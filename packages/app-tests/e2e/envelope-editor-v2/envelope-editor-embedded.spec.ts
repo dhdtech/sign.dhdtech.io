@@ -63,9 +63,10 @@ const enableEmbedAuthoringWhiteLabel = async (userId: number) => {
 /**
  * The default background color from the theme before any CSS injection.
  *
- * The theme default `--background: 0 0% 100%` resolves to hsl(0, 0%, 100%) which is white.
+ * The theme default `--background: 0 0% 3.9%` resolves to hsl(0, 0%, 3.9%) — the
+ * design-system void (#0a0a0a).
  */
-const DEFAULT_BODY_BG_COLOR = 'rgb(255, 255, 255)';
+const DEFAULT_BODY_BG_COLOR = 'rgb(10, 10, 10)';
 
 /**
  * When `--background` is set to `0 100% 50%` (hsl(0, 100%, 50%)) the body background
