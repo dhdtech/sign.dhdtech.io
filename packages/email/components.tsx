@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react';
-import { Link as ReactEmailLink } from 'react-email';
+import { Body as ReactEmailBody, Link as ReactEmailLink } from 'react-email';
 
 export {
-  Body,
   Button,
   Column,
   Container,
@@ -24,6 +23,14 @@ export {
 const NON_COLOR_TEXT_UTILITY =
   /^text-(?:center|left|right|justify|start|end|wrap|nowrap|balance|pretty|ellipsis|clip|xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)$/;
 
+/** Tailwind `bg-*` utilities that do not set the background colour or image. */
+const NON_PAINT_BACKGROUND_UTILITY = /^bg-(?:clip|origin)-/;
+
+const setsBackground = (className?: string) =>
+  (className ?? '')
+    .split(/\s+/)
+    .some((utility) => utility.startsWith('bg-') && !NON_PAINT_BACKGROUND_UTILITY.test(utility));
+
 const setsTextColor = (className?: string) =>
   (className ?? '').split(/\s+/).some((utility) => utility.startsWith('text-') && !NON_COLOR_TEXT_UTILITY.test(utility));
 
@@ -42,6 +49,24 @@ const setsTextColor = (className?: string) =>
 export const Link = ({ className, ...props }: ComponentProps<typeof ReactEmailLink>) => (
   <ReactEmailLink
     className={setsTextColor(className) ? className : `${className ?? ''} text-primary`.trim()}
+    {...props}
+  />
+);
+
+/**
+ * The mail client paints whatever is outside the 600px column itself, and its
+ * default is white. Fifteen of the thirty templates render `<Body>` with no
+ * background at all, so on those the design system's void content sat on a
+ * white page — invisible when `--background` was white, glaring once it became
+ * the void.
+ *
+ * Rather than edit fifteen templates, default the background here, in the one
+ * module every email component imports from. A template that sets its own
+ * background keeps it.
+ */
+export const Body = ({ className, ...props }: ComponentProps<typeof ReactEmailBody>) => (
+  <ReactEmailBody
+    className={setsBackground(className) ? className : `${className ?? ''} bg-background`.trim()}
     {...props}
   />
 );
