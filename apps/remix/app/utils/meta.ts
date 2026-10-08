@@ -1,8 +1,16 @@
 import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import { i18n, type MessageDescriptor } from '@lingui/core';
 
-export const appMetaTags = (title?: MessageDescriptor) => {
+export type AppMetaTagsOptions = {
+  /** Override the default page description. */
+  description?: string;
+  /** Emit `robots: noindex, follow` — for pages that must not rank, such as auth screens. */
+  noindex?: boolean;
+};
+
+export const appMetaTags = (title?: MessageDescriptor, options: AppMetaTagsOptions = {}) => {
   const description =
+    options.description ??
     'Send, sign and manage agreements with DHDTech.io Sign — a fast, precise signing flow and the infrastructure to build on.';
 
   return [
@@ -25,7 +33,7 @@ export const appMetaTags = (title?: MessageDescriptor) => {
     },
     {
       name: 'robots',
-      content: 'index, follow',
+      content: options.noindex ? 'noindex, follow' : 'index, follow',
     },
     {
       property: 'og:title',

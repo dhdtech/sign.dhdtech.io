@@ -1,4 +1,27 @@
 User-agent: *
+Allow: /
 Disallow: /sign/
 Disallow: /d/
 Disallow: /embed/
+Disallow: /api/
+
+# AI answer engines and crawlers.
+# Allowed explicitly so the intent is declared here, not inherited from `*`.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://sign.dhdtech.io/sitemap.xml
+# llms.txt: https://sign.dhdtech.io/llms.txt

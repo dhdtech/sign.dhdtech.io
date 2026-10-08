@@ -1,3 +1,4 @@
+import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import {
   IS_GOOGLE_SSO_ENABLED,
   IS_MICROSOFT_SSO_ENABLED,
@@ -14,8 +15,11 @@ import { appMetaTags } from '~/utils/meta';
 import type { Route } from './+types/signup';
 
 export function meta() {
-  return appMetaTags(msg`Sign Up`);
+  // Auth screen: must not rank in search, but its links should still be followed.
+  return appMetaTags(msg`Sign Up`, { noindex: true });
 }
+
+export const links: Route.LinksFunction = () => [{ rel: 'canonical', href: `${NEXT_PUBLIC_WEBAPP_URL()}/signup` }];
 
 export function loader({ request }: Route.LoaderArgs) {
   const isEmailPasswordSignupEnabled = isSignupEnabledForProvider('email');

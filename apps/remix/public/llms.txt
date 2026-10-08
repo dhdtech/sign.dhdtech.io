@@ -1,0 +1,14 @@
+# DHDTech.io Sign
+
+> A free, self-hosted instance of Documenso — open-source document signing, hosted by DHDTech.io.
+
+## Product
+
+- [DHDTech.io Sign](https://sign.dhdtech.io/): Create, send and sign documents electronically. Free to use, self-hosted by DHDTech.io, with no per-seat fee.
+- [Sign in](https://sign.dhdtech.io/signin): Sign in to an existing DHDTech.io Sign account.
+- [Create account](https://sign.dhdtech.io/signup): Create a free DHDTech.io Sign account.
+
+## Upstream
+
+- [Documenso](https://github.com/documenso/documenso): The open-source DocuSign alternative this instance is built from. Licensed AGPL-3.0. All credit to the original community.
+- [Documenso community](https://documenso.com): The upstream project's website.

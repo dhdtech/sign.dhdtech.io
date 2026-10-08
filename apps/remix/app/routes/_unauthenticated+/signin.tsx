@@ -1,5 +1,6 @@
 import { authClient } from '@documenso/auth/client';
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
 import {
   IS_GOOGLE_SSO_ENABLED,
   IS_MICROSOFT_SSO_ENABLED,
@@ -25,8 +26,11 @@ import { appMetaTags } from '~/utils/meta';
 import type { Route } from './+types/signin';
 
 export function meta() {
-  return appMetaTags(msg`Sign In`);
+  // Auth screen: must not rank in search, but its links should still be followed.
+  return appMetaTags(msg`Sign In`, { noindex: true });
 }
+
+export const links: Route.LinksFunction = () => [{ rel: 'canonical', href: `${NEXT_PUBLIC_WEBAPP_URL()}/signin` }];
 
 export async function loader({ request }: Route.LoaderArgs) {
   const { isAuthenticated } = await getOptionalSession(request);
