@@ -134,43 +134,20 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
     <html translate="no" lang={lang} data-theme={theme} className={theme ?? ''} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        {/* Icons: the shared brand set, served from `public/`. `favicon.ico` is
-            declared explicitly rather than left to the browser's implicit
-            `/favicon.ico` probe, and the light/dark pairs follow the same
-            `prefers-color-scheme` pattern the main site uses so the monogram
-            stays legible on both a light and a dark tab strip. */}
+        {/* Icons: the shared brand set, served from `public/`. The mark is the
+            void monogram on a white tile, so it reads on a dark, light or
+            mid-grey tab bar without help — there is no `prefers-color-scheme`
+            pair to declare, and no scheme-specific artwork to ship.
+            `favicon.ico` is declared explicitly rather than left to the
+            browser's implicit `/favicon.ico` probe. */}
         <link rel="icon" type="image/x-icon" href={`${basePath}/favicon.ico`} />
         <link rel="icon" type="image/png" sizes="16x16" href={`${basePath}/favicon-16x16.png`} />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={`${basePath}/favicon-32x32.png`}
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={`${basePath}/favicon-32x32-white.png`}
-          media="(prefers-color-scheme: dark)"
-        />
+        <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/favicon-32x32.png`} />
         <link rel="icon" type="image/png" sizes="48x48" href={`${basePath}/favicon-48x48.png`} />
         <link rel="icon" type="image/png" sizes="96x96" href={`${basePath}/favicon-96x96.png`} />
         <link rel="icon" type="image/png" sizes="128x128" href={`${basePath}/favicon-128x128.png`} />
+        <link rel="icon" type="image/png" sizes="256x256" href={`${basePath}/favicon-256x256.png`} />
         <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon.svg`} />
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href={`${basePath}/favicon-black.svg`}
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          type="image/svg+xml"
-          href={`${basePath}/favicon-white.svg`}
-          media="(prefers-color-scheme: dark)"
-        />
         <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/apple-touch-icon.png`} />
         <link rel="apple-touch-icon" sizes="120x120" href={`${basePath}/apple-touch-icon-120x120.png`} />
         <link rel="apple-touch-icon" sizes="152x152" href={`${basePath}/apple-touch-icon-152x152.png`} />
